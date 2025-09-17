@@ -1,0 +1,8 @@
+var i = 1;                
+function myLoop() {      
+  setTimeout(function() {  
+    code;   
+    i++;                  
+    if (i < 100) {        
+      myLoop();}}, 3000)}
+myLoop();                 
