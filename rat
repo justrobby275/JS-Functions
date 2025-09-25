@@ -1,0 +1,72 @@
+var bg=createSprite(200,200);
+bg.setAnimation ("rubber");
+bg.scale = 4;
+var ex= randomNumber(100,300)
+  var why= randomNumber(100,300)
+var rat=createSprite(ex,why)
+rat.setAnimation ("rat")
+rat.scale=0.5
+
+
+var car =createSprite(100,100)
+car.setAnimation ("car")
+car.scale =0.3
+car.velocityY =randomNumber (-20,20);
+car.velocityX=randomNumber (-20,20);
+  
+function draw(){
+  
+
+if (car.x >390) {car.velocityX=randomNumber(-21)}
+  if (car.x <1) {car.velocityX =randomNumber(21)}
+  if (car.y >390) {car.velocityY=randomNumber(-21)}
+  if (car.y <10) {car.velocityY =randomNumber(21)}
+  
+}
+
+rat.velocityY =randomNumber (-20,20);
+rat.velocityX=randomNumber (-20,20);
+
+
+function draw(){
+  
+
+if (rat.x >390) {rat.velocityX=randomNumber(-21)}
+  if (rat.x <1) {rat.velocityX =randomNumber(21)}
+  if (rat.y >390) {rat.velocityY=randomNumber(-21)}
+  if (rat.y <10) {rat.velocityY =randomNumber(21)}
+}
+
+var i = 1;                 
+function myLoop() {        
+  setTimeout(function() {  
+  
+  var ex= randomNumber(100,300)
+  var why= randomNumber(100,300)
+  var rat=createSprite (ex,why)
+  rat.setAnimation ("rat")
+  rat.scale=0.5
+  var rando=Math.floor(Math.random() * 7);
+  if (rando===1){ rat.rotation=20 }
+  if (rando===2){ rat.rotation=80 }
+  if (rando===3){ rat.rotation=120 }
+   if (rando===4){ rat.rotation=140 }
+  if (rando===5){ rat.rotation=160 }
+  if (rando===6){ rat.rotation=randomNumber (1,360) }
+  drawSprites();
+fill("black")
+textSize (30)
+text("rats make me crazy", 100,350)
+    i++;                    
+    if (i < 100000) {          
+      myLoop();          
+    }                    
+  }, 0.01)
+}
+
+myLoop();
+
+drawSprites();
+
+
+
