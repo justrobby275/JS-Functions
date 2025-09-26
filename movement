@@ -1,0 +1,12 @@
+  if (keyDown("up")) {
+    turtle.y = turtle.y - 3;
+  }
+  if (keyDown("down")) {
+    turtle.y = turtle.y + 3;
+  }
+  if (keyDown("left")) {
+    turtle.x = turtle.x - 3;
+  }
+  if (keyDown("right")) {
+    turtle.x = turtle.x + 3;
+  }
