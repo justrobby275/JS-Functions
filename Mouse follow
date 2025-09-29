@@ -13,7 +13,7 @@ if (ghost.x>400){x=x-2
 }
 if (ghost.x<0){x=x+2
 }
-ghost.velocityX=x/.2 //+randomNumber(0,30)
+ghost.velocityX=x/.8
 
 if (World.mouseY>ghost.y){y=y+2
 }
@@ -24,7 +24,7 @@ if (ghost.y>400){y=y-2
 }
 if (ghost.y<0){y=y+2
 }
-ghost.velocityY=y/.2 //+randomNumber(0,30)
+ghost.velocityY=y/.8
 
 if (x>10){
   x=x-2}
