@@ -1,0 +1,27 @@
+var x=0
+var y=0
+
+function draw() {
+if (World.mouseX>ghost.x){x=x+2
+}
+if (World.mouseX<ghost.x){x=x-2
+}
+if (ghost.x>400){x=x-2
+}
+if (ghost.x<0){x=x+2
+}
+ghost.x=x/.5
+
+if (World.mouseY>ghost.y){y=y+2
+}
+if (World.mouseY<ghost.y){y=y-2
+}
+
+if (ghost.y>400){y=y-2
+}
+if (ghost.y<0){y=y+2
+}
+ghost.y=y/.5
+
+ drawSprites();
+}
