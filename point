@@ -1,0 +1,5 @@
+  if ((sprite.isTouching(coin))&&(tick==points)) {
+    points = points + 1;}
+    
+  if ((!sprite.isTouching(coin))&&(tick<points)){
+    tick=tick+1}
