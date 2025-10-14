@@ -1,0 +1,208 @@
+var stop=0;
+var score = 0;
+var r=205;
+var g=205;
+var b=185;
+var vel=-5;
+var cost1=1;
+var cost2=1;
+var cact=1;
+var score=0;
+var dark=0;
+var sandwhite=0;
+var birdv=0;
+var birdup=2;
+var bug=0;
+var high=score;
+
+
+var dino=createSprite(100,300);
+dino.setAnimation("dino");
+dino.scale=0.4;
+dino.setCollider("rectangle",0,0,75,200,45);
+
+var cactus=createSprite(800,305);
+cactus.setAnimation("cactus1");
+cactus.scale=0.9;
+cactus.velocityX=vel;
+cactus.setCollider("rectangle",0,10);
+  var bird=createSprite(1500,305);
+  bird.setAnimation("bird");
+  bird.scale=0.4;
+
+var desert=createSprite(200,343);
+desert.setAnimation ("desert");
+desert.scale=4;
+var desert2=createSprite(200,343);
+desert2.setAnimation ("desert2");
+desert2.scale=4;
+desert2.alpha=dark;
+
+var sand1=createSprite (500,350);
+var sand2=createSprite (500,350);
+sand1.scale=2;
+sand2.scale=2;
+sand1.velocityX=vel;
+
+function draw() { //loop
+background (rgb(r,g,b));
+
+//sand
+  if (stop==0){
+  sand1.velocityX=vel;
+  sand2.velocityX=vel;
+if (cost1==1){if (sandwhite==0){
+sand1.setAnimation("sand1")}
+else{sand1.setAnimation("sand1w")}}
+if (cost1==2){if (sandwhite==0){
+sand1.setAnimation("sand2")}
+else{sand1.setAnimation("sand2w")}}
+if (cost1==3){if (sandwhite==0){
+sand1.setAnimation("sand3")}
+else{sand1.setAnimation("sand3w")}}
+if (cost2==1){if (sandwhite==0){
+sand2.setAnimation("sand1")}
+else{sand2.setAnimation("sand1w")}}
+if (cost2==2){if (sandwhite==0){
+sand2.setAnimation("sand2")}
+else{sand2.setAnimation("sand2w")}}
+if (cost2==3){if (sandwhite==0){
+sand2.setAnimation("sand3")}
+else{sand2.setAnimation("sand3w")}}
+
+if ((sand1.x>100)&&(sand1.x<200)){
+cost2=(randomNumber(1,3));
+sand2.x=500;
+sand2.velocityX=vel}
+if ((sand2.x>-25)&&(sand2.x<50)){
+sand1.x=500;
+  cost1=(randomNumber(1,3))}}
+   else{sand1.velocityX=0;
+   sand2.velocityX=0}
+
+//dino
+if (stop==0){
+if (keyDown("down")){
+  dino.setAnimation("crouch");
+  dino.setCollider("rectangle",-40,40,75,100,45)}
+ else {dino.setAnimation("dino");
+      dino.setCollider("rectangle",0,0,75,200,45)}
+if (dino.y<300){
+  dino.velocityY=dino.velocityY+2}
+if (dino.y>300){
+  dino.y=300}
+if ((keyWentDown("up"))&&(dino.y>299)){
+dino.velocityY=-22.5}}
+else{dino.setAnimation("death");
+  cactus.velocityX=0;
+  dino.velocityY=0} //death vel
+
+//cactus
+  if (stop==0){
+    if ((score>25)&&(cactus.x<-25)){
+      birdv=1}
+    if (score>35){
+      birdv=0}
+    if (birdv==0){
+    cactus.velocityX=vel;
+    bird.velocityX=0;
+    bird.x=800;
+if (cactus.x<-200){
+  cactus.x=randomNumber(500,1000);
+  cact=randomNumber(1,3)}
+  if (cact==1){
+    cactus.setAnimation("cactus1")}
+  if (cact==2){
+    cactus.setAnimation("cactus2")}
+  if (cact==3){
+    cactus.setAnimation("cactus3")}}
+//bird
+  else {bird.velocityX=vel;
+     cactus.velocityX=0;
+  cactus.x=800;
+if (bird.x<-100){
+  bird.x=randomNumber(800,1100);
+  birdup=randomNumber(1,2)}
+  if (birdup==1){
+  bird.y=295}
+  if (birdup==2){ 
+  bird.y=230}}} //meow:3
+
+//score
+if (stop==0){
+score=World.seconds;
+textSize(25);
+fill ("white");
+text(score,370,30)} //high score dosnt work
+if (score>high){high=score} 
+
+//events
+if (score==2){
+  vel=-8}
+if (score==3){
+  vel=-10}
+if (score==7){
+  vel=-12}
+if (score==10){
+  vel=-15}
+if (score==12){
+  vel=-17}
+if (score==15){
+  vel=-18.5}
+if (score==20){
+  vel=-20}
+if (score==26){
+  vel=-15}
+if (score==35&&(bird.x<-25)){
+  vel=-20;
+  birdv=0}
+if (score==70){
+  vel=-15}
+  
+//dark
+  desert2.alpha=dark;
+if ((score>40)&&(r>0)){
+  if ((sand2.x>-25)&&(sand2.x<50)){
+sandwhite=1}
+dark=dark+0.008;
+r=r-1;
+g=g-1;
+b=b-1}
+if ((score>60)&&(r<206)){
+  if ((sand2.x>-25)&&(sand2.x<50)){
+sandwhite=0}
+dark=dark-0.1;
+r=r+2;
+g=g+2;
+b=b+2;
+sandwhite=0}
+
+//debug                   //  - I - Debug      - P - up     -O- no cactus
+if (keyDown("i")){
+  bug=1}
+if (bug==1){
+cactus.debug=true;
+dino.debug=true;
+bird.debug=true}
+else{cactus.debug=false;
+dino.debug=false;
+bird.debug=false}
+if (keyDown("p")){
+  dino.y=100}
+if (keyDown("o")){
+  cactus.y=100}
+
+//death
+if ((dino.isTouching(cactus))||dino.isTouching(bird)){
+    stop=1}
+  if (stop==1) {
+    fill("white");
+    textSize(50);
+    text("Game Over!", 40, 150);
+    textSize(25);
+    text("high score", 10, 20);
+    text (high, 10, 45);
+  if (dino.y>300){
+  dino.y=300}}
+  
+drawSprites();}
