@@ -1,0 +1,9 @@
+if ((keyWentDown("space"))&&(alien.y>=309)){
+alien.velocityY=-10}
+
+if (alien.y<310){
+alien.velocityY=alien.velocityY+0.5}
+
+if (alien.y>310){
+alien.velocityY=0
+  alien.y=310}
