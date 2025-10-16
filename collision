@@ -1,0 +1,3 @@
+//bounce
+if (parrot.isTouching(penguin)){
+    parrot.velocityX=(penguin.velocityX+(parrot.velocityX*-1))}
