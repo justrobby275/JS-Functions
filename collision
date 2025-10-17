@@ -1,3 +1,46 @@
-//bounce
+//two moving colision
 if (parrot.isTouching(penguin)){
     parrot.velocityX=(penguin.velocityX+(parrot.velocityX*-1))}
+
+
+
+
+//bounce
+var basketball = createSprite(200, 0);
+basketball.setAnimation("basketball");
+basketball.setCollider("circle");
+
+var wood = createSprite(200, 375);
+wood.setAnimation("floor");
+
+  basketball.velocityX = 5;
+
+function draw() {
+  basketball.velocityY = basketball.velocityY + 0.3;
+
+
+if ((keyWentDown("space"))&&(basketball.y>=309)){
+basketball.velocityY=-25
+}
+
+
+if (basketball.y<310){
+basketball.velocityY=basketball.velocityY+0.5}
+
+if (Math.abs(basketball.velocityY)<=0){
+  basketball.velocityY=0}
+
+if (basketball.y>310){
+basketball.velocityY=(basketball.velocityY*-.75)}
+
+  if (basketball.x <= 0 || basketball.x >= 400) {
+    basketball.velocityX *= -.80;}
+    
+  if (keyWentDown("space") && basketball.y >= 310) {
+    basketball.velocityY = -25;}
+
+basketball.rotationSpeed=basketball.velocityX
+
+  background("skyblue");
+  drawSprites();
+}
