@@ -6,3 +6,9 @@ function myLoop() {
     if (i < 100) {        
       myLoop();}}, 3000)}
 myLoop();                 
+
+
+function loop() {
+//code
+    setTimeout(loop, 3000);}
+loop();
