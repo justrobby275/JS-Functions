@@ -1,8 +1,11 @@
 function formatNumber(num) { //chop off 1 zero and devide by 10 for the dec
 
-  if (num >= 1000000000000000) {
-    return Math.floor(num / 100000000000000)/10 + "Q";
+  if (num >= 1000000000000000000) {
+    return Math.floor(num / 100000000000000000)/10 + "S";
   } 
+  else if (num >= 1000000000000000) {
+  return Math.floor(num / 100000000000000)/10 + "Q";
+  }
   else if (num >= 1000000000000) {
     return Math.floor(num / 100000000000)/10 + "T";
   }
