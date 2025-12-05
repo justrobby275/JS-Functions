@@ -1,0 +1,70 @@
+var refineCount1 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount2 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount3 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount4 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount5 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount6 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount7 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount8 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+var refineCount9 = [0,0,0,0,0,0,0,0,0];  // Tracks refine 1–9
+function trackRefine() {
+  if (rockV==1){
+    refineCount1[refineV - 1]++}
+  if (rockV==2){
+    refineCount2[refineV - 1]++}
+  if (rockV==3){
+    refineCount3[refineV - 1]++}
+  if (rockV==4){
+    refineCount4[refineV - 1]++}
+  if (rockV==5){
+    refineCount5[refineV - 1]++}
+  if (rockV==6){
+    refineCount6[refineV - 1]++}
+  if (rockV==7){
+    refineCount7[refineV - 1]++}
+  if (rockV==8){
+    refineCount8[refineV - 1]++}
+  if (rockV==9){
+    refineCount9[refineV - 1]++}
+    
+}
+function trackRefineDown() {
+  if (rockV==1){
+    refineCount1[refineV - 1]--}
+  if (rockV==2){
+    refineCount2[refineV - 1]--}
+  if (rockV==3){
+    refineCount3[refineV - 1]--}
+  if (rockV==4){
+    refineCount4[refineV - 1]--}
+  if (rockV==5){
+    refineCount5[refineV - 1]--}
+  if (rockV==6){
+    refineCount6[refineV - 1]--}
+  if (rockV==7){
+    refineCount7[refineV - 1]--}
+  if (rockV==8){
+    refineCount8[refineV - 1]--}
+  if (rockV==9){
+    refineCount9[refineV - 1]--}
+}
+function refineUpdate(){
+  if (rockV==1){
+    refine=refineCount1[refineV-1]}
+  if (rockV==2){
+    refine=refineCount2[refineV-1]}
+  if (rockV==3){
+    refine=refineCount3[refineV-1]}
+  if (rockV==4){
+    refine=refineCount4[refineV-1]}
+  if (rockV==5){
+    refine=refineCount5[refineV-1]}
+  if (rockV==6){
+    refine=refineCount6[refineV-1]}
+  if (rockV==7){
+    refine=refineCount7[refineV-1]}
+  if (rockV==8){
+    refine=refineCount8[refineV-1]}
+  if (rockV==9){
+    refine=refineCount9[refineV-1]}
+}
