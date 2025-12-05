@@ -1,0 +1,27 @@
+function FontSize(textStr, startX, endX, baseSize, minSize) {
+  var wMax = endX - startX;
+  var size = baseSize;
+//Proportions
+  var shrink = wMax/textWidth(textStr);
+  if (shrink < 1) size = Math.max(minSize, size * shrink);
+  textSize(size);
+// Wrap
+  var words = textStr.split(" "), line = "", out = "";
+  for (var i = 0; i < words.length; i++) {
+    var test = line + (line ? " " : "") + words[i];
+    if (textWidth(test) > wMax) { out += line + "\n"; line = words[i]; }
+    else line = test;
+  }
+  out += line;
+  return { text: out, size: size };
+}
+
+//in loop
+fill("black");            //TEXT FUNCTION VAR:
+textFont("Comic Sans MS");//start end base min
+var result = FontSize(news, 250, 390, 30, 13);
+textSize(result.size);
+text(result.text, 250, yPos);
+
+//output example
+text((formatNumber(up3V)), 148, 395);
