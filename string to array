@@ -1,0 +1,7 @@
+ if (loadData !== null) {
+    var loadArray = loadData.split(",");
+    for (var k = 0; k < loadArray.length; k++) {
+      loadArray[k] = Number(loadArray[k]);
+    }}
+
+  //array.lenghth and K tells the code how many times to run .split
