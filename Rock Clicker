@@ -1,0 +1,1458 @@
+//Personal Github Function Library//
+//https://github.com/justrobby275/JS-Functions
+
+
+//Notes
+//click bug still partialy an issue
+
+
+////////////////////////////////////////Functions////////////////////////////////////////////////////////////////////////////////////////////////
+//the functions do NOT work with debug or multipliers (if I wanted to add them), as it only updates the array by 1 when the bar fills
+var rockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks rock 1-9
+function trackRock() {
+    rockCount[rockV - 1]++;
+}
+
+function trackRockDown() {
+    rockCount[rockV - 1]--;
+}
+var refineCount1 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount2 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount3 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount4 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount5 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount6 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount7 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount8 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+var refineCount9 = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Tracks refine 1–9
+function trackRefine() {
+    if (rockV == 1) {
+        refineCount1[refineV - 1]++;
+    }
+    if (rockV == 2) {
+        refineCount2[refineV - 1]++;
+    }
+    if (rockV == 3) {
+        refineCount3[refineV - 1]++;
+    }
+    if (rockV == 4) {
+        refineCount4[refineV - 1]++;
+    }
+    if (rockV == 5) {
+        refineCount5[refineV - 1]++;
+    }
+    if (rockV == 6) {
+        refineCount6[refineV - 1]++;
+    }
+    if (rockV == 7) {
+        refineCount7[refineV - 1]++;
+    }
+    if (rockV == 8) {
+        refineCount8[refineV - 1]++;
+    }
+    if (rockV == 9) {
+        refineCount9[refineV - 1]++;
+    }
+}
+
+function trackRefineDown() {
+    if (rockV == 1) {
+        refineCount1[refineV - 1]--;
+    }
+    if (rockV == 2) {
+        refineCount2[refineV - 1]--;
+    }
+    if (rockV == 3) {
+        refineCount3[refineV - 1]--;
+    }
+    if (rockV == 4) {
+        refineCount4[refineV - 1]--;
+    }
+    if (rockV == 5) {
+        refineCount5[refineV - 1]--;
+    }
+    if (rockV == 6) {
+        refineCount6[refineV - 1]--;
+    }
+    if (rockV == 7) {
+        refineCount7[refineV - 1]--;
+    }
+    if (rockV == 8) {
+        refineCount8[refineV - 1]--;
+    }
+    if (rockV == 9) {
+        refineCount9[refineV - 1]--;
+    }
+}
+
+function refineUpdate() {
+    if (rockV == 1) {
+        refine = refineCount1[refineV - 1];
+    }
+    if (rockV == 2) {
+        refine = refineCount2[refineV - 1];
+    }
+    if (rockV == 3) {
+        refine = refineCount3[refineV - 1];
+    }
+    if (rockV == 4) {
+        refine = refineCount4[refineV - 1];
+    }
+    if (rockV == 5) {
+        refine = refineCount5[refineV - 1];
+    }
+    if (rockV == 6) {
+        refine = refineCount6[refineV - 1];
+    }
+    if (rockV == 7) {
+        refine = refineCount7[refineV - 1];
+    }
+    if (rockV == 8) {
+        refine = refineCount8[refineV - 1];
+    }
+    if (rockV == 9) {
+        refine = refineCount9[refineV - 1];
+    }
+}
+//sell dosnt need to be tracked, just reset
+
+//FontSize Function Inspired by    https://stackoverflow.com/questions/6114300/shrinking-font-size-at-a-user-types-to-fit-in-an-input-using-javascript
+function FontSize(textStr, startX, endX, baseSize, minSize) {
+    var wMax = endX - startX;
+    var size = baseSize; //Proportions
+    var shrink = wMax / textWidth(textStr);
+    if (shrink < 1) size = Math.max(minSize, size * shrink);
+    textSize(size); // Wrap
+    var words = textStr.split(" "),
+        line = "",
+        out = "";
+    for (var i = 0; i < words.length; i++) {
+        var test = line + (line ? " " : "") + words[i];
+        if (textWidth(test) > wMax) {
+            out += line + "\n";
+            line = words[i];
+        } else line = test;
+    }
+    out += line;
+    return {
+        text: out,
+        size: size
+    };
+}
+
+function formatNumber(num) { //chop off 1 zero and devide by 10 for the dec
+    if (num >= 1000000000000000000) {
+        return Math.floor(num / 100000000000000000) / 10 + "S";
+    } else if (num >= 1000000000000000) {
+        return Math.floor(num / 100000000000000) / 10 + "Q";
+    } else if (num >= 1000000000000) {
+        return Math.floor(num / 100000000000) / 10 + "T";
+    } else if (num >= 1000000000) {
+        return Math.floor(num / 100000000) / 10 + "B";
+    } else if (num >= 1000000) {
+        return Math.floor(num / 100000) / 10 + "M";
+    } else if (num >= 1000) {
+        return Math.floor(num / 100) / 10 + "K";
+    } else {
+        return num;
+    }
+}
+
+//stock vars
+var back = createSprite(200, 200);
+back.setAnimation("back");
+var stocktick = 5000;
+var crash = 0;
+var peak = 0;
+var level = 0;
+var overflow = 0;
+var overflow2 = 0;
+var underflow = 0;
+var underflow2 = 0;
+var median = 0;
+var point = {
+    x: 130,
+    y: 200
+};
+var tick = 0;
+var mean = 0;
+var points = [{
+    x: point.x,
+    y: point.y
+}];
+var price = 0;
+
+//Update Stock
+function updateStock() {
+    tick++;
+    mean = 0;
+    if (point.y > 250) mean += randomNumber(-15, 0);
+    else mean += randomNumber(-10, 10);
+    if (point.y < 150) mean += randomNumber(0, 15);
+    else mean += randomNumber(-10, 10); //stock variables//
+    if (level == 1) {
+        mean /= 10;
+    }
+    if (peak == 1) {
+        mean -= randomNumber(1, 8);
+    }
+    if (crash == 1) {
+        mean += randomNumber(1, 8);
+    }
+    if (overflow == 1) {
+        mean += randomNumber(1, 8);
+    }
+    if (overflow2 == 1) {
+        mean += randomNumber(1, 8);
+    }
+    if (underflow == 1) {
+        mean -= randomNumber(1, 8);
+    }
+    if (underflow2 == 1) {
+        mean -= randomNumber(1, 8);
+    }
+    if (median == 0) {
+        mean += randomNumber(0, 2);
+    }
+    if (median == 1) {
+        mean -= randomNumber(0, 2);
+    }
+    if (price >= 90) {
+        price = 90;
+        mean = 20;
+    }
+    if (price <= 1) {
+        price = 1;
+        mean = -20;
+    }
+    point.y += mean;
+    price = Math.round(100 - ((point.y - 100) / 200) * 100); //price calculation
+    mean = Math.max(-20, Math.min(20, mean));
+    point.x += 25;
+    points.push({
+        x: point.x,
+        y: point.y
+    });
+    if (point.x > 335) {
+        for (var i = 0; i < points.length; i++) {
+            points[i].x -= 25;
+        }
+        point.x -= 25;
+        if (points[0].x < 130) {
+            points.shift();
+        }
+    }
+    countDown = frames;
+    setTimeout(updateStock, stocktick);
+}
+updateStock();
+
+//stock variables tick
+function loop() {
+    level = randomNumber(0, 1);
+    peak = randomNumber(0, 1);
+    crash = randomNumber(0, 1);
+    if (price > 25) {
+        overflow = randomNumber(0, 1);
+    } else {
+        overflow = 0;
+    }
+    if (price > 50) {
+        overflow2 = randomNumber(0, 1);
+    } else {
+        overflow2 = 0;
+    }
+    if (price < 25) {
+        underflow2 = randomNumber(0, 1);
+    } else {
+        underflow2 = 0;
+    }
+    if (price < 15) {
+        underflow2 = randomNumber(0, 1);
+    } else {
+        underflow2 = 0;
+    }
+    if (price < 40) {
+        median = 1;
+    } else {
+        median = 0;
+    }
+    setTimeout(loop, 3000);
+}
+loop();
+
+var clicks=0;
+
+var coins = 0;
+var amt = 0;
+var mouse1 = 1;
+var B1 = 0;
+var B1T = 10;
+var B2 = 0;
+var B2T = 10;
+var B3 = 0;
+var B3T = 10;
+
+//upgrade vars
+var click = 1.001;
+var barter = 1;
+var worker4 = 1000;
+var worker5 = 1000;
+var worker6 = 1000;
+var started4 = false;
+var started5 = false;
+var started6 = false; ///////////////Sprites n stuff I think////////////////////////////////
+//ammounts
+var rock = 0;
+var refine = 0;
+var mult = 0; //V & U
+var rockV = 1;
+var rockU = 1;
+var refineV = 1;
+var refineU = 1;
+var sellV = 1;
+var sellU = 1;
+//ECT
+var rockC = createSprite(45, 65);
+rockC.setAnimation("rockC");
+rockC.setCollider("rectangle", 0, -5, 75, 40);
+var rockT1 = createSprite(30, 110);
+rockT1.setAnimation("rockT1");
+rockT1.scale = 0.3;
+rockT1.setCollider("rectangle", -15, -50, 110, 70, 0);
+var rockT2 = createSprite(60, 85);
+rockT2.setAnimation("rockT2");
+rockT2.scale = 0.3;
+rockT2.setCollider("rectangle", 10, 30, 110, 70, 0);
+var refineC = createSprite(45, 165);
+refineC.setAnimation("refineC");
+refineC.setCollider("rectangle", 0, -5, 75, 40);
+var refineT1 = createSprite(30, 210);
+refineT1.setAnimation("rockT1");
+refineT1.scale = 0.3;
+refineT1.setCollider("rectangle", -15, -50, 110, 70, 0);
+var refineT2 = createSprite(60, 185);
+refineT2.setAnimation("rockT2");
+refineT2.scale = 0.3;
+refineT2.setCollider("rectangle", 10, 30, 110, 70, 0);
+var sellC = createSprite(45, 265);
+sellC.setAnimation("sellC");
+sellC.setCollider("rectangle", 0, -5, 75, 40);
+var sellT1 = createSprite(30, 310);
+sellT1.setAnimation("rockT1");
+sellT1.scale = 0.3;
+sellT1.setCollider("rectangle", -15, -50, 110, 70, 0);
+var sellT2 = createSprite(60, 285);
+sellT2.setAnimation("rockT2");
+sellT2.scale = 0.3;
+sellT2.setCollider("rectangle", 10, 30, 110, 70, 0);
+var but1 = createSprite(225, 75);
+but1.setAnimation("but1");
+but1.scale = 1.5;
+but1.setCollider("rectangle", 0, -10, 150, 30);
+var but2 = createSprite(225, 175);
+but2.setAnimation("but2");
+but2.scale = 1.5;
+but2.setCollider("rectangle", -3, -10, 150, 30);
+var but3 = createSprite(225, 275);
+but3.setAnimation("but3");
+but3.scale = 1.5;
+but3.setCollider("rectangle", 0, -10, 150, 30); //mini's
+var mini1 = createSprite(150, 260);
+mini1.scale = 0.5;
+mini1.setAnimation("rockC2");
+var mini2 = createSprite(305, 260);
+mini2.scale = 0.5;
+mini2.setAnimation("refineC2");
+var up1V = 10;
+var up1C = 1;
+var up1 = createSprite(125, 305);
+up1.setAnimation("up1");
+up1.setCollider("rectangle", 2, 8, 25, 25, 0);
+var up2V = 10;
+var up2C = 1;
+var up2 = createSprite(125, 340);
+up2.setAnimation("up2");
+up2.setCollider("rectangle", 2, 8, 25, 25, 0);
+var up3V = 10;
+var up3C = 1;
+var up3 = createSprite(125, 375);
+up3.setAnimation("up3");
+up3.setCollider("rectangle", 2, 8, 25, 25, 0);
+var up4V = 10;
+var up4C = 1;
+var up4 = createSprite(370, 50);
+up4.setAnimation("up1-1");
+up4.setCollider("rectangle", 2, 8, 25, 25, 0);
+var up5V = 10;
+var up5C = 1;
+var up5 = createSprite(370, 150);
+up5.setAnimation("up1-2");
+up5.setCollider("rectangle", 2, 8, 25, 25, 0);
+var up6V = 10;
+var up6C = 1;
+var up6 = createSprite(370, 248);
+up6.setAnimation("up1-3");
+up6.setCollider("rectangle", 2, 8, 25, 25, 0);
+var stockbuy = createSprite(200, 310);
+stockbuy.visible = false;
+stockbuy.setAnimation("stockbuy");
+stockbuy.scale = 1.2;
+stockbuy.setCollider("rectangle", 0, 0, 75, 75, 0);
+var stocksell = createSprite(100, 310);
+stocksell.visible = false;
+stocksell.setAnimation("stocksell");
+stocksell.scale = 1.2;
+stocksell.setCollider("rectangle", 0, 0, 75, 75, 0);
+var butstock = createSprite(35, 355);
+butstock.setAnimation("butstock");
+butstock.scale = 0.5;
+butstock.setCollider("rectangle", 15, 60, 225, 75, 0);
+var stock = createSprite(200, 200);
+stock.setAnimation("stock");
+stock.scale = 1.2;
+stock.setCollider("rectangle", 0, 10, 300, 175, 0);
+stock.visible = false;
+var pricemark = createSprite(330, 600);
+pricemark.setAnimation("pricemark");
+var stocktickchange = stocktick;
+var frames = Math.round(stocktick / 33);
+var countDown = frames;
+
+//upgrade stop
+var stop1 = 0;
+var stop2 = 0;
+var stop3 = 0;
+
+//news var and sprite
+var bestcoin = 0;
+var newsarray = ["Rock\n Simulator"];
+
+//SaveNloadNTutorial
+var save = createSprite(15, 7);
+save.setAnimation("save");
+var load = createSprite(40, 7);
+load.setAnimation("load");
+var promptStop = 0;
+var pass = false;
+var tutorial = createSprite(67, 7);
+tutorial.setAnimation("tutorial");
+var stats = createSprite(10, 340);
+stats.setAnimation("stats");
+
+
+////////////////////////////////////////draw loop/////////////////////////////////////////////////////////////////////////
+function draw() {
+    drawSprites(stockbuy, stocksell, stock, pricemark); 
+    
+    //Tutorial
+    if (mouseDown("leftButton") && mouseIsOver(tutorial) && promptStop == 0) {
+        var TutorialVar = prompt("Welcome to Rock Simulator! \n You, a entrepreneurial caveman find yourself leaving behind your family and friends at the height of your life to start your very own rock business. \nStart by grabbing your first rock, if you dont want to put in the effort, buy manual labor to do it for you! \nThen take that precious rock and grind and mold it into somthing useful, and alas sell your spoils to the highest bidder. \n As you grow your empire click the upgrades to sell your rocks for even more even if it takes a little longer to obtain, and finaly if your feeling precarious feel free to gamble your money in the stock market! \n\nStock Broker increases the speed of the stock market \nBartering gives you a bonus for every rock sold \nClick power increases your manual clicking strength");
+        promptStop = 1;
+    }    drawSprites(stockbuy, stocksell, stock, pricemark);
+    //stats
+    if (mouseDown("leftButton") && mouseIsOver(stats) && promptStop == 0) {
+        var combinedVar = (rockV+sellV+refineV-3);
+        var combinedVar2 = (up1C+up2C+up3C+up4C+up4C+up6C-6);
+        var statVar = prompt("Total Clicks - "+clicks + "\nBuildings bought - "+combinedVar+"\nMost Rock$ ever held - "+formatNumber(bestcoin)+ "\nUpgrades bought - "+combinedVar2);
+        promptStop = 1;
+    }
+    
+
+    //save
+
+    //The save system records all nessisary variables along with some tamper checks into a string                                                                                                //the rest ->
+    //        0  1  2     3    4  5  6  7  8   9   10  11   12  13  14    15  16 17   18  19   20    21      22   23   24 
+    var data = [
+        25 + "&", 1, up3C, 9583, 18, 370, 2 + "&", up4V, 87, up2C + "&", 82, coins + "&%%", 697, up5C, up4C, up6C, 5, amt + "#$#$O", up1V, up2V, up3V, 8469457 + "&O", up1C, up5V, up6V + "O!",
+        rockCount[0] + "U", rockCount[1], rockCount[2] + "O%", rockCount[3], rockCount[4] + "U", rockCount[5] + "K", rockCount[6] + "k", rockCount[7] + "w", rockCount[8] + "#&", rockCount[9],
+        refineCount1[0] + "O#W", refineCount1[1] + "&i", refineCount1[2], refineCount1[3] + "$OOO", refineCount1[4], refineCount1[5], refineCount1[6], refineCount1[7], refineCount1[8], refineCount1[9],
+        refineCount2[0] + "&", refineCount2[1], refineCount2[2] + "&", refineCount2[3] + "A", refineCount2[4], refineCount2[5], refineCount2[6] + "@", refineCount2[7], refineCount2[8], refineCount2[9],
+        refineCount3[0] + "&", refineCount3[1] + "&OO", refineCount3[2], refineCount3[3], refineCount3[4], refineCount3[5] + "N", refineCount3[6] + "#", refineCount3[7], refineCount3[8], refineCount3[9],
+        refineCount4[0] + "OB", refineCount4[1], refineCount4[2] + "&", refineCount4[3] + "%", refineCount4[4], refineCount4[5], refineCount4[6], refineCount4[7], refineCount4[8], refineCount4[9 + "O"],
+        refineCount5[0] + "&", refineCount5[1] + "&O", refineCount5[2], refineCount5[3] + "A", refineCount5[4], refineCount5[5], refineCount5[6], refineCount5[7], refineCount5[8], refineCount5[9 + "}"],
+        refineCount6[0] + "&O", refineCount6[1], refineCount6[2] + "&", refineCount6[3], refineCount6[4], refineCount6[5] + "%", refineCount6[6], refineCount6[7], refineCount6[8], refineCount6[9 + "U"],
+        refineCount7[0] + "OP", refineCount7[1] + "&", refineCount7[2], refineCount7[3] + "$", refineCount7[4], refineCount7[5], refineCount7[6] + "%", refineCount7[7], refineCount7[8], refineCount7[9],
+        refineCount8[0] + "&", refineCount8[1], refineCount8[2] + "&", refineCount8[3], refineCount8[4], refineCount8[5] + "Y", refineCount8[6] + "A", refineCount8[7], refineCount8[8], refineCount8[9],
+        refineCount9[0] + "L", refineCount9[1] + "O&l", refineCount9[2], refineCount9[3] + "AO%O", refineCount9[4], refineCount9[5], refineCount9[6], refineCount9[7], refineCount9[8], refineCount9[9],
+        rockU, 5, sellU, refineU, 2, stocktick, click, clicks, bestcoin
+    ]
+
+    if (mouseDown("leftButton") && (mouseIsOver(save)) && (promptStop == 0)) {
+        prompt("Copy Your Data", data)
+        promptStop = 1
+    }
+    if (!mouseDown("leftButton") && (!mouseIsOver(save)) && (!promptStop == 0)) {
+        promptStop = 0
+    }
+
+    //load
+    if (mouseDown("leftButton") && mouseIsOver(load) && promptStop == 0) {
+        var loadData = prompt("Paste Your Data");
+        promptStop = 1;
+
+        // data to array with filter
+        if (loadData !== null && loadData !== undefined) {
+            var loadArray = loadData.split(",");
+            for (var k = 0; k < loadArray.length; k++) {
+                loadArray[k] = Number(loadArray[k].replace(/\D/g, ""));
+            }
+        }
+
+        console.log(loadArray)
+        if (loadData !== null && loadData !== undefined) {
+            if (
+                //loadArray.length==132 && //length check
+                loadArray[0] == 25 &&
+                loadArray[1] == 1 &&
+                !isNaN(loadArray[2]) &&
+                loadArray[3] == 9583 &&
+                loadArray[4] == 18 &&
+                loadArray[5] == 370 &&
+                loadArray[6] == 2 &&
+                !isNaN(loadArray[7]) &&
+                loadArray[8] == 87 &&
+                !isNaN(loadArray[9]) &&
+                loadArray[10] == 82 &&
+                !isNaN(loadArray[11]) &&
+                loadArray[12] == 697 &&
+                !isNaN(loadArray[13]) &&
+                !isNaN(loadArray[14]) &&
+                !isNaN(loadArray[15]) &&
+                loadArray[16] == 5 &&
+                !isNaN(loadArray[17]) &&
+                !isNaN(loadArray[18]) &&
+                !isNaN(loadArray[19]) &&
+                !isNaN(loadArray[20]) &&
+                loadArray[21] == 8469457 &&
+                !isNaN(loadArray[22]) &&
+                !isNaN(loadArray[23]) &&
+                !isNaN(loadArray[24]) &&
+                !isNaN(loadArray[25]) &&
+                !isNaN(loadArray[26]) &&
+                !isNaN(loadArray[27]) &&
+                !isNaN(loadArray[28]) &&
+                !isNaN(loadArray[29]) &&
+                !isNaN(loadArray[30]) &&
+                !isNaN(loadArray[31]) &&
+                !isNaN(loadArray[32]) &&
+                !isNaN(loadArray[33]) &&
+                !isNaN(loadArray[34]) &&
+                !isNaN(loadArray[35]) &&
+                !isNaN(loadArray[36]) &&
+                !isNaN(loadArray[37]) &&
+                !isNaN(loadArray[38]) &&
+                !isNaN(loadArray[39]) &&
+                !isNaN(loadArray[40]) &&
+                !isNaN(loadArray[41]) &&
+                !isNaN(loadArray[42]) &&
+                !isNaN(loadArray[43]) &&
+                !isNaN(loadArray[44]) &&
+                !isNaN(loadArray[45]) &&
+                !isNaN(loadArray[46]) &&
+                !isNaN(loadArray[47]) &&
+                !isNaN(loadArray[48]) &&
+                !isNaN(loadArray[49]) &&
+                !isNaN(loadArray[50]) &&
+                !isNaN(loadArray[51]) &&
+                !isNaN(loadArray[52]) &&
+                !isNaN(loadArray[53]) &&
+                !isNaN(loadArray[54]) &&
+                !isNaN(loadArray[55]) &&
+                !isNaN(loadArray[56]) &&
+                !isNaN(loadArray[57]) &&
+                !isNaN(loadArray[58]) &&
+                !isNaN(loadArray[59]) &&
+                !isNaN(loadArray[60]) &&
+                !isNaN(loadArray[61]) &&
+                !isNaN(loadArray[62]) &&
+                !isNaN(loadArray[63]) &&
+                !isNaN(loadArray[64]) &&
+                !isNaN(loadArray[65]) &&
+                !isNaN(loadArray[66]) &&
+                !isNaN(loadArray[67]) &&
+                !isNaN(loadArray[68]) &&
+                !isNaN(loadArray[69]) &&
+                !isNaN(loadArray[70]) &&
+                !isNaN(loadArray[71]) &&
+                !isNaN(loadArray[72]) &&
+                !isNaN(loadArray[73]) &&
+                !isNaN(loadArray[74]) &&
+                !isNaN(loadArray[75]) &&
+                !isNaN(loadArray[76]) &&
+                !isNaN(loadArray[77]) &&
+                !isNaN(loadArray[78]) &&
+                !isNaN(loadArray[79]) &&
+                !isNaN(loadArray[80]) &&
+                !isNaN(loadArray[81]) &&
+                !isNaN(loadArray[82]) &&
+                !isNaN(loadArray[83]) &&
+                !isNaN(loadArray[84]) &&
+                !isNaN(loadArray[85]) &&
+                !isNaN(loadArray[86]) &&
+                !isNaN(loadArray[87]) &&
+                !isNaN(loadArray[88]) &&
+                !isNaN(loadArray[89]) &&
+                !isNaN(loadArray[90]) &&
+                !isNaN(loadArray[91]) &&
+                !isNaN(loadArray[92]) &&
+                !isNaN(loadArray[93]) &&
+                !isNaN(loadArray[94]) &&
+                !isNaN(loadArray[95]) &&
+                !isNaN(loadArray[96]) &&
+                !isNaN(loadArray[97]) &&
+                !isNaN(loadArray[98]) &&
+                !isNaN(loadArray[99]) &&
+                !isNaN(loadArray[100]) &&
+                !isNaN(loadArray[101]) &&
+                !isNaN(loadArray[102]) &&
+                !isNaN(loadArray[103]) &&
+                !isNaN(loadArray[104]) &&
+                !isNaN(loadArray[105]) &&
+                !isNaN(loadArray[106]) &&
+                !isNaN(loadArray[107]) &&
+                !isNaN(loadArray[108]) &&
+                !isNaN(loadArray[109]) &&
+                !isNaN(loadArray[110]) &&
+                !isNaN(loadArray[111]) &&
+                !isNaN(loadArray[112]) &&
+                !isNaN(loadArray[113]) &&
+                !isNaN(loadArray[114]) &&
+                !isNaN(loadArray[115]) &&
+                !isNaN(loadArray[116]) &&
+                !isNaN(loadArray[117]) &&
+                !isNaN(loadArray[118]) &&
+                !isNaN(loadArray[119]) &&
+                !isNaN(loadArray[120]) &&
+                !isNaN(loadArray[121]) &&
+                !isNaN(loadArray[122]) &&
+                !isNaN(loadArray[123]) &&
+                !isNaN(loadArray[124]) &&
+                !isNaN(loadArray[125]) &&
+                loadArray[126] == 5 &&
+                !isNaN(loadArray[127]) &&
+                !isNaN(loadArray[128]) &&
+                loadArray[129] == 2 &&
+                !isNaN(loadArray[130]) &&
+                !isNaN(loadArray[131]) &&
+                !isNaN(loadArray[132]) &&
+                !isNaN(loadArray[133])
+
+            ) {
+                console.log("Pass")
+                console.log(loadArray.length)
+                up3C = loadArray[2]
+                up1C = loadArray[22]
+                up2C = loadArray[9]
+                coins = loadArray[11]
+                up4C = loadArray[14]
+                up5C = loadArray[13]
+                up6C = loadArray[15]
+                amt = loadArray[17]
+                up1V = loadArray[18]
+                up2V = loadArray[19]
+                up3V = loadArray[20]
+                up4V = loadArray[7]
+                up5V = loadArray[23]
+                up6V = loadArray[24]
+                rockU = loadArray[125]
+                sellU = loadArray[127]
+                refineU = loadArray[128]
+                rockV = rockU
+                sellV = sellU
+                refineV = refineU
+                stocktick = loadArray[130]
+                clicks=loadArray[132]
+                bestcoin=loadArray[133]
+                
+                click = (loadArray[131] * 0.001)
+                if (click == 1.001){
+                  click=1.002;
+                } //having issues getting this to work
+                
+                //the rest
+                rockCount[0] = loadArray[25];
+                rockCount[1] = loadArray[26];
+                rockCount[2] = loadArray[27];
+                rockCount[3] = loadArray[28];
+                rockCount[4] = loadArray[29];
+                rockCount[5] = loadArray[30];
+                rockCount[6] = loadArray[31];
+                rockCount[7] = loadArray[32];
+                rockCount[8] = loadArray[33];
+                rockCount[9] = loadArray[34];
+
+                //RefineCounts//
+                refineCount1[0] = loadArray[35];
+                refineCount1[1] = loadArray[36];
+                refineCount1[2] = loadArray[37];
+                refineCount1[3] = loadArray[38];
+                refineCount1[4] = loadArray[39];
+                refineCount1[5] = loadArray[40];
+                refineCount1[6] = loadArray[41];
+                refineCount1[7] = loadArray[42];
+                refineCount1[8] = loadArray[43];
+                refineCount1[9] = loadArray[44];
+
+                refineCount2[0] = loadArray[45];
+                refineCount2[1] = loadArray[46];
+                refineCount2[2] = loadArray[47];
+                refineCount2[3] = loadArray[48];
+                refineCount2[4] = loadArray[49];
+                refineCount2[5] = loadArray[50];
+                refineCount2[6] = loadArray[51];
+                refineCount2[7] = loadArray[52];
+                refineCount2[8] = loadArray[53];
+                refineCount2[9] = loadArray[54];
+
+                refineCount3[0] = loadArray[55];
+                refineCount3[1] = loadArray[56];
+                refineCount3[2] = loadArray[57];
+                refineCount3[3] = loadArray[58];
+                refineCount3[4] = loadArray[59];
+                refineCount3[5] = loadArray[60];
+                refineCount3[6] = loadArray[61];
+                refineCount3[7] = loadArray[62];
+                refineCount3[8] = loadArray[63];
+                refineCount3[9] = loadArray[64];
+
+                refineCount4[0] = loadArray[65];
+                refineCount4[1] = loadArray[66];
+                refineCount4[2] = loadArray[67];
+                refineCount4[3] = loadArray[68];
+                refineCount4[4] = loadArray[69];
+                refineCount4[5] = loadArray[70];
+                refineCount4[6] = loadArray[71];
+                refineCount4[7] = loadArray[72];
+                refineCount4[8] = loadArray[73];
+                refineCount4[9] = loadArray[74];
+
+                refineCount5[0] = loadArray[75];
+                refineCount5[1] = loadArray[76];
+                refineCount5[2] = loadArray[77];
+                refineCount5[3] = loadArray[78];
+                refineCount5[4] = loadArray[79];
+                refineCount5[5] = loadArray[80];
+                refineCount5[6] = loadArray[81];
+                refineCount5[7] = loadArray[82];
+                refineCount5[8] = loadArray[83];
+                refineCount5[9] = loadArray[84];
+
+                refineCount6[0] = loadArray[85];
+                refineCount6[1] = loadArray[86];
+                refineCount6[2] = loadArray[87];
+                refineCount6[3] = loadArray[88];
+                refineCount6[4] = loadArray[89];
+                refineCount6[5] = loadArray[90];
+                refineCount6[6] = loadArray[91];
+                refineCount6[7] = loadArray[92];
+                refineCount6[8] = loadArray[93];
+                refineCount6[9] = loadArray[94];
+
+                refineCount7[0] = loadArray[95];
+                refineCount7[1] = loadArray[96];
+                refineCount7[2] = loadArray[97];
+                refineCount7[3] = loadArray[98];
+                refineCount7[4] = loadArray[99];
+                refineCount7[5] = loadArray[100];
+                refineCount7[6] = loadArray[101];
+                refineCount7[7] = loadArray[102];
+                refineCount7[8] = loadArray[103];
+                refineCount7[9] = loadArray[104];
+
+                refineCount8[0] = loadArray[105];
+                refineCount8[1] = loadArray[106];
+                refineCount8[2] = loadArray[107];
+                refineCount8[3] = loadArray[108];
+                refineCount8[4] = loadArray[109];
+                refineCount8[5] = loadArray[110];
+                refineCount8[6] = loadArray[111];
+                refineCount8[7] = loadArray[112];
+                refineCount8[8] = loadArray[113];
+                refineCount8[9] = loadArray[114];
+
+                refineCount9[0] = loadArray[115];
+                refineCount9[1] = loadArray[116];
+                refineCount9[2] = loadArray[117];
+                refineCount9[3] = loadArray[118];
+                refineCount9[4] = loadArray[119];
+                refineCount9[5] = loadArray[120];
+                refineCount9[6] = loadArray[121];
+                refineCount9[7] = loadArray[122];
+                refineCount9[8] = loadArray[123];
+                refineCount9[9] = loadArray[124];
+
+                rock = rockCount[rockV - 1];
+                refineUpdate()
+            } else {
+                console.log("Fail");
+                console.log(loadArray.length);
+                prompt("Incorrect Data Format!", data);
+            }
+        }
+    }
+    if (!mouseDown("leftButton") && (!mouseIsOver(load)) && (!promptStop == 0)) {
+        promptStop = 0;
+    }
+    //multiplier tracker
+    if (up2C == 1) {
+        barter = 0;
+    }
+    mult = ((1 * rockV * refineV * sellV) + barter); //news articles
+    if (coins > bestcoin) {
+        bestcoin = coins;
+    }
+    if (bestcoin >= 0) {
+        newsarray = [
+            "CEO of Rock Company: DEAD or just lazy?",
+            "17 Workers missing after freak mining accident today",
+            "Survery states data that 80% of miners die before 30, Maybe get an education?",
+            "Smash rocks together for better rocks? Too poor? I don't care!",
+            "BREAKING NEWS! The Stock Market crashed! We're screwed!",
+            "Seis Siete Rocks!?",
+            "Grug spotted wearing shiny rock—status symbol or midlife crisis?",
+            "BREAKING: Mammoth union demands better rock benefits.",
+            "Scientists baffled: Rock tastes same no matter how much you lick.",
+            "RockCoin now accepted at local cave market!",
+            "Mathamatical mathamatics when the math aint mathing",
+            "BREAKING: Rival tribe launches hostile takeover with bigger sticks.",
+            "Grug says: \"Click faster\"",
+            "BREAKING: Meteor shower mistaken for free rocks giveaway.",
+            "Local cave influencer promotes 'minimalist rock lifestyle.'",
+            "New law: No throwing rocks at tax collectors.",
+            "Newtons laws apear to work with rocks too",
+            "Joe Mama\nOHHHHHHHHHHHHHHHHHHHHH",
+            "Grug comes out with new music, calls it-Rocks and roll",
+            "BREAKING: Rock shortage sparks panic in cave economy.",
+            "Grug claims he invented fire AND rock — historians skeptical.",
+            "BREAKING: Mammoth spotted hoarding rocks, market crashes.",
+            "New fad: Polished rocks now worth triple!",
+            "Local celebrity Grug endorses rocks",
+            "Your rocks may be getting grayer, hard to tell...",
+            "Are crabs replacing the human workforce? Tune in tonight at 8 to find out",
+            "Its not realy propoganda if you listen to it, is it?",
+            "Join the Workforce!",
+            "Its 11:00, Do you know were your children are?",
+            "Your rocks are flying off shelves! littaraly, we need better shelves...",
+            "Scientist's belive rocks may be detramental to your health if consumed",
+            "BREAKTHROUGH: Hitting two rocks together makes fire!",
+            "The Rats are in the walls",
+            "Somtimes I just type these when im bored",
+            "An army is aproaching from the West!",
+            "Press *REDACTED* for infinite money",
+            "You should have thought of this earlier!",
+            "BREAKING NEWS: Competing compony's CEO found dead in river",
+            "Hi",
+            "I mean I spend all day typing on this keyboard to a quote on quote news outlet that ive never heard of, just making up stories off the top of my head, I havent seen my family in a year please help me they trapped me in a blank room with a typewriter Im not allowed to leave",
+            "Anti-Rock Rally held outside Grugs cave met with police brutatlity",
+            "Science!", "Scientists think the ground may be one big rock",
+            "who'h there cowboy, slow down",
+            "stock market due to rise says degenerate gambler",
+            "where does your money even come from?",
+            "How long do you think I can actually make these? I mean I guess it cuts off at the bottom but like I could just for say: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ya know?",
+            "Uranium found to have anti-aging and healing properties, says rock company CEO",
+            "brok my * ky",
+            "toby miguair",
+            "Those who live in glass houses should not not throw stones",
+            "Those who have stones should throw them at glass houses",
+            "what makes these clicker games so addicting?",
+            "why bother to barter, just steal ;)",
+            "AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+            "\"You man a fish to eat, he days for a teach,\"",
+            "Are we rich yet?", "Your family misses you",
+            "you right now: click click click click   nerd",
+            "Grug announces new IPO: Initial Pebble Offering!",
+            "BREAKING: Cave paintings now considered insider trading.",
+            "Experts warn: Too many rocks may cause cave clutter.",
+            "Local caveman invents wheel, immediately regrets it.",
+            "Rock prices hit all-time high! Investors grunt in approval.",
+            "New study: Fire good, but rocks still better.",
+            "BREAKING: Un-civilized Tribe debates if rock is currency or snack.",
+            "Grug spotted selling 'Premium Rocks' for 3x price, Genius or scam?",
+            "Tribe elder warns: 'Too many rocks cause cave collapse.'",
+            "Hey Vsuace, Michael here",
+            "Local cave influencer promotes 'rock-based skincare routine.'",
+            "Grug claims wheel invention was 'just a round rock'",
+            "Local cave artist paints rock, calls it 'modern art'",
+            "BREAKING: Tribe debates if shiny rock is magic or scam.",
+            "Grug says: 'Click faster or mammoth eats you!'",
+            "BREAKING: Rock shortage sparks panic in economy.",
+            "New fad: Polished rocks now worth triple!",
+            "BREAKING: Tribe introduces rock tax, chaos ensues.",
+            "BREAKING: local spotted trading with berries, both parties have been detained",
+            "Tribe elder declares: 'Rock is life, but rock is death...'",
+            "BREAKING: worker union demands better benefits.",
+            "Grug claims fire is just angry rock - Scientists are looking into it",
+            "Local cave has rockslide, 5 missing, tribe calls it ' A blessing'",
+            "BREAKING: RockCoin value skyrockets after mammoth endorsement",
+            "BREAKING: Tribe introduces 'RockCoin Mining' — literally mining rocks.",
+            "Local cave influencer says: 'Rocks are the new fire.'",
+            "BREAKING: Mammoth spotted wearing sunglasses, tribe confused.",
+            "E",
+            "e",
+            "Grug announces new tech: 'Smart Rock' — still just a rock but with a cool name",
+            "Tribe bans shiny rocks saying they've had 5 go blind",
+            "BREAKING: Rival tribe claims fire is fake news.",
+            "Grug spotted eating rock—calls it 'superfood'",
+            "Mammoth union demands cave heating benefits.",
+            "Local cave artist introduces 'abstract rock stacking'",
+            "Shminky",
+            "BREAKING: Tribe debates if rock is snack or weapon — again",
+            "BREAKING: RockCoin value drops after mammoth scandal.",
+            "Your clicking speed is impressive… but at what cost?",
+            "Your family misses you. Seriously, go outside.",
+            "You are now legally classified as a rock addict.",
+            "BREAKING: Scientists confirm: Clicking rocks does not improve real life traits.",
+            "Your rocks are worthless… but you keep clicking anyway.",
+            "Your ancestors would be proud",
+            "Kittyy!",
+            "Your ancestors would be disapointed",
+            "BREAKING: You are now richer than 99% of cavemen.",
+            "Your rocks are multiplying faster than your responsibilities.",
+            "BREAKING: You’ve ignored 12 notifications while playing this.",
+            "Your rocks will not love you back...",
+            "BREAKING: You’ve clicked enough to power a small village.",
+            "Your life choices led you here. Think about that.",
+            "BREAKING: You are now officially a rock tycoon.",
+            "You’ve ignored 27 messages while playing this.",
+            "BREAKING: You’ve spent more time here than sleeping.",
+            "rocks will not have you back", "Based", "fimsh",
+            "You’ve clicked enough to power a small city.",
+            "BREAKING: You’ve ignored reality for too long.",
+            "Your mouse is crying. Please stop.",
+            "You’ve achieved nothing, yet won everything",
+            "wowzers, Ive made 100 of these...",
+            "Truth is, I am Iron Man", "Your office is cluttered with rocks",
+            "Wizards use your rocks as scrying orbs",
+            "Strange glowing rocks making workers sick, sold to children",
+            "Im built different", "idn", "There are no bannanas in the sky",
+            "Theres like 6-7 other things you could be doing",
+            "Thats a nice boulder, I like that boulder",
+            "BREAKING: Elders peer the future, see `dwayne the -Rock- johnson`",
+            "why?",
+            "Pet rocks are the new craze among the teens",
+            "Schools are putting you in their history books",
+            "You try to assend to Godhood but trip and miss your ride up",
+            "Whats the time?",
+            "25",
+            "I only coded this number to go so high",
+            "I should realy finish drawing these game assets",
+            "wanna hear a secret? Ill `probably` tell you in the next article-",
+            "Your mineshaft budget cut leads to the death of hundreds",
+            "your clicking finger could destroy planets",
+            "Guh",
+            "your not my dad dont tell me what to do",
+            "meow:3",
+            "I forgor",
+            "Your Rocks Rock",
+      
+            
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+            "BREAKING NEWS:You’ve clicked "+clicks+" times.",
+        ];
+    }
+
+    //mousedown
+    if (!mouseDown("left")) {
+        mouse1 = 1;
+    }
+    if (price <= 1) {
+        price = 1;
+    }
+
+    //debug
+    var debug = 0;
+    if (keyDown("p")) {
+        coins = Infinity;
+    }
+    if (keyDown("t")) {
+        coins += 1;
+    }
+    if (keyDown("i")) {
+        coins += 9000;
+    }
+    if (keyDown("o")) {
+        refine += 100;
+    }
+
+    //frames
+    rockC.setFrame(rockV);
+    refineC.setFrame(refineV);
+    sellC.setFrame(sellV);
+    mini1.setFrame(rockV);
+    mini2.setFrame(refineV);
+
+    //drawsprites
+    drawSprites();
+
+    //1 - Rocks
+    // upgrade cost
+    upgradeCost = rockU * (Math.pow(50, (rockU)) / 10);
+    // Upgrade
+    if (mousePressedOver(rockC) && coins >= upgradeCost && rockU < 9 && mouse1 == 1) {
+        coins -= upgradeCost;
+        B1 = 0;
+        B2 = 0;
+        B3 = 0;
+        rockU += 1;
+        rockV = rockU;
+        rock = rockCount[rockV - 1];
+        mouse1 = 0;
+        refineUpdate();
+    }
+    //Increase
+    if (mousePressedOver(rockT1) && rockV < rockU && mouse1 == 1) {
+        rockV += 1;
+        rock = rockCount[rockV - 1];
+        B1 = 0;
+        B2 = 0;
+        B3 = 0;
+        mouse1 = 0;
+        refineUpdate();
+    }
+    if (rockV > 9) {
+        rockV = 9;
+    }
+    // Decrease
+    if (mousePressedOver(rockT2) && rockV > 1 && mouse1 == 1) {
+        rockV -= 1;
+        rock = rockCount[rockV - 1];
+        B1 = 0;
+        B2 = 0;
+        B3 = 0;
+        mouse1 = 0;
+        refineUpdate();
+    }
+    if (rockV < 1) {
+        rockV = 1;
+    }
+    //upgrade cost
+    if (rockU < 9) {
+        textSize(14);
+        fill("black");
+        textFont("Comic Sans MS");
+        text("Upgrade " + "$" + (formatNumber(upgradeCost)), 2, 115);
+    } else {
+        stop1 = 1;
+    }
+    //2 - Refine
+    // upgrade cost
+    upgradeCost2 = refineU * (Math.pow(100, (refineU)) / 10);
+    // Upgrade
+    if (mousePressedOver(refineC) && coins >= upgradeCost2 && refineU < 9 && mouse1 == 1) {
+        coins -= upgradeCost2;
+        refineU += 1;
+        refineV = refineU;
+        B2 = 0;
+        B3 = 0;
+        mouse1 = 0;
+        refineUpdate();
+    }
+    //Increase
+    if (mousePressedOver(refineT1) && refineV < refineU && mouse1 == 1) {
+        refineV += 1;
+        B2 = 0;
+        B3 = 0;
+        mouse1 = 0;
+        refineUpdate();
+    }
+    if (refineV > 9) {
+        refineV = 9;
+    }
+    // Decrease
+    if (mousePressedOver(refineT2) && refineV > 1 && mouse1 == 1) {
+        refineV -= 1;
+        B2 = 0;
+        B3 = 0;
+        mouse1 = 0;
+        refineUpdate();
+    }
+    if (refineV < 1) {
+        refineV = 1;
+    }
+    //upgrade cost
+    if (refineU < 9) {
+        textSize(14);
+        fill("black");
+        textFont("Comic Sans MS");
+        text("Upgrade " + "$" + (formatNumber(upgradeCost2)), 2, 215);
+    } else {
+        stop2 = 1;
+    }
+    //3 - Sell
+    // upgrade cost
+    upgradeCost3 = sellU * (Math.pow(200, (sellU)) / 10);
+    // Upgrade
+    if (mousePressedOver(sellC) && coins >= upgradeCost3 && sellU < 9 && mouse1 == 1) {
+        coins -= upgradeCost3;
+        sellU += 1;
+        sellV = sellU;
+        B3 = 0;
+        mouse1 = 0;
+    }
+    //Increase
+    if (mousePressedOver(sellT1) && sellV < sellU && mouse1 == 1) {
+        sellV += 1;
+        B3 = 0;
+        mouse1 = 0;
+    }
+    if (sellV > 9) {
+        sellV = 9;
+    }
+    // Decrease
+    if (mousePressedOver(sellT2) && sellV > 1 && mouse1 == 1) {
+        sellV -= 1;
+        B3 = 0;
+        mouse1 = 0;
+    }
+    if (sellV < 1) {
+        sellV = 1;
+    }
+    //upgrade cost
+    if (sellU < 9) {
+        textSize(14);
+        fill("black");
+        textFont("Comic Sans MS");
+        text("Upgrade " + "$" + (formatNumber(upgradeCost3)), 2, 315);
+    } else {}
+
+    //stocks button
+    if (mousePressedOver(butstock) || debug == 1) {
+        stock.visible = true;
+        pricemark.visible = true;
+        back.setAnimation("back2");
+    }
+    if (mouseDown() && !mouseIsOver((rockC)) && !mouseIsOver(butstock) && !mouseIsOver(stocksell) && !mouseIsOver(stockbuy)) {
+        stock.visible = false;
+        pricemark.visible = false;
+        back.setAnimation("back");
+    }
+
+    //buttons and progress bars
+    if (mousePressedOver(but1) && (mouse1 == 1)) {
+        B1 += click;
+        clicks+=1;
+        if (B1 >= B1T) {
+            rock += 1;
+            trackRock();
+            B1 = 0;
+        }
+        mouse1 = 0;
+    }
+    fill("green");
+    rect(190, 100, (B1 / B1T) * 90, 10);
+    textFont("Comic Sans MS");
+    textSize(25);
+    fill("black");
+    textAlign(CENTER);
+    text(formatNumber(rock), 237, 135);
+    
+    if (mousePressedOver(but2) && (mouse1 == 1) && (rock > 0)) {
+        B2 += click;
+        clicks+=1;
+        if (B2 >= B2T) {
+            refine += 1;
+            rock -= 1;
+            trackRockDown();
+            trackRefine();
+            B2 = 0;
+        }
+        mouse1 = 0;
+    }
+    fill("green");
+    rect(190, 200, (B2 / B2T) * 90, 10);
+    textFont("Comic Sans MS");
+    textSize(25);
+    fill("black");
+    textAlign(CENTER);
+    text(formatNumber(refine), 237, 235);
+    //text fix
+    textAlign(LEFT);
+    
+    if (mousePressedOver(but3) && (mouse1 == 1) && (refine > 0)) {
+        B3 += click;
+        clicks+=1;
+        if (B3 >= B3T) {
+            coins += ((1 * rockV * refineV * sellV) + barter);
+            refine -= 1;
+            trackRefineDown();
+            B3 = 0;
+        }
+        mouse1 = 0;
+    }
+    fill("green");
+    rect(270, 295, (B3 / B3T) * 90, 10);
+
+    //hardness var's
+    B1T = 3 + (rockV * 3);
+    B2T = 3 + (refineV * 3);
+    B3T = 3 + (sellV * 3);
+
+    //stockbuy and sell
+    if (mousePressedOver(stockbuy) && (coins > price)) {
+        amt = Math.round(amt + coins / price);
+        coins = 0;
+        pricemark.y = point.y;
+        stockbuy.x = -400;
+    }
+    if (mousePressedOver(stocksell) && (amt >= 1)) {
+        coins = Math.round(amt * price);
+        amt = 0;
+        pricemark.y = 600;
+        stockbuy.x = 200;
+    }
+
+    //barter bonus
+    barter = Math.round((up2C * (Math.pow(up2C, (3))))); //three square upgrades
+    if (mousePressedOver(up1) && (coins >= up1V) && (mouse1 == 1)) {
+        mouse1 = 0;
+        stocktick -= (stocktick * 0.1);
+        stocktick = round(stocktick);
+        up1C += 1;
+        coins -= up1V;
+        up1V = up1V * (Math.pow(3, (1)));
+    }
+
+    //countDown and stocktick check
+    if (stocktick !== stocktickchange) {
+        frames = Math.round(stocktick / 33);
+        countDown = frames;
+        stocktickchange = stocktick;
+    }
+    countDown--;
+    if (countDown <= 0) {
+        countDown = frames;
+    }
+    if (mousePressedOver(up2) && (coins >= up2V) && (mouse1 == 1)) {
+        mouse1 = 0;
+        up2C += 1;
+        coins -= up2V;
+        up2V = Math.round(up2V * (Math.pow(3.2, (1))));
+    }
+    if (mousePressedOver(up3) && (coins >= up3V) && (mouse1 == 1)) //click
+    {
+        mouse1 = 0;
+        click = Number((click + click * 0.05).toFixed(3));
+        //console.log (click.toString().length)
+        if (click.toString().length != 5) {
+            click += 0.001;
+        }
+        up3C += 1;
+        coins -= up3V;
+        up3V = up3V * (Math.pow(2, (1)));
+    }
+    if (mousePressedOver(up4) && (coins >= up4V) && (mouse1 == 1)) {
+        mouse1 = 0;
+        worker4 -= (worker4 * 0.1);
+        up4C += 1;
+        coins -= up4V;
+        up4V = up4V * (Math.pow(3, (1)));
+    }
+    if (mousePressedOver(up5) && (coins >= up5V) && (mouse1 == 1)) {
+        mouse1 = 0;
+        worker5 -= (worker5 * 0.1);
+        up5C += 1;
+        coins -= up5V;
+        up5V = up5V * (Math.pow(3, (1)));
+    }
+    if (mousePressedOver(up6) && (coins >= up6V) && (mouse1 == 1)) {
+        mouse1 = 0;
+        worker6 -= (worker6 * 0.1);
+        up6C += 1;
+        coins -= up6V;
+        up6V = up6V * (Math.pow(3, (1)));
+    }
+    //stop upgrades
+    textSize(15);
+    fill("black");
+    textFont("Comic Sans MS");
+    if (stop1 == 1) {
+        text("Max", 30, 115);
+    }
+    if (stop2 == 1) {
+        text("Max", 30, 215);
+    }
+    if (stop3 == 1) {
+        text("Max", 30, 315);
+    }
+    //three upgrade cost text stuff //and the new automation textstuff
+    textSize(15);
+    fill("black");
+    textFont("Comic Sans MS");
+    text("Stock Broker", 148, 310);
+    text(("$" + formatNumber(up1V)), 148, 325);
+    text("Bartering", 148, 345);
+    text(("$" + formatNumber(up2V)), 148, 360);
+    text("Click Power", 148, 380);
+    text(("$" + formatNumber(up3V)), 148, 395);
+    textAlign(CENTER);
+    textSize(12.5);
+    text(("Miner\n" + "$" + formatNumber(up4V)), 369, 20);
+    text(("Laborer\n" + "$" + formatNumber(up5V)), 369, 120);
+    text(("Merchent\n" + "$" + formatNumber(up6V)), 369, 220);
+    textAlign(LEFT);
+
+    //coinstext  
+    textFont("Comic Sans MS");
+
+    //coins
+    textSize(30);
+    fill("black");
+    text("Rock$ " + (formatNumber(coins)), 100, 30); //hide
+    if (stock.visible) {
+        stroke("black");
+        textSize(25);
+        stockbuy.visible = true;
+        stocksell.visible = true;
+        stockbuy.y = 310;
+        stocksell.y = 310;
+        drawSprites();
+        text(formatNumber(price), 35, 170);
+        text(formatNumber(amt), 35, 270);
+        textSize(15);
+        text((countDown), 340, 300);
+        textFont("Comic Sans MS"); //coins
+        textSize(30);
+        fill("black");
+        text("Rock$ " + (formatNumber(coins)), 100, 30);
+        for (var i = 0; i < points.length - 1; i++) {
+            line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
+        }
+    } else {
+        stockbuy.visible = false;
+        stocksell.visible = false;
+        stockbuy.y = 600;
+        stocksell.y = 600;
+    }
+
+    //start automation
+    if (up4C >= 2 && started4 == false) {
+        started4 = true;
+        loop4();
+    }
+    if (up5C >= 2 && started5 == false) {
+        started5 = true;
+        loop5();
+    }
+    if (up6C >= 2 && started6 == false) {
+        started6 = true;
+        loop6();
+    }
+
+    //newstext
+    fill("black"); //TEXT FUNCTION VAR:
+    textFont("Comic Sans MS"); //start end base min
+    var result = FontSize(news, 250, 390, 30, 13);
+    textSize(result.size);
+    text(result.text, 250, yPos);
+
+    //NewsMovementlogic
+    if (pauseCounter > 0) {
+        pauseCounter--;
+        return;
+    }
+    yPos += direction;
+
+    //move limits
+    if (yPos <= 345) {
+        yPos = 345;
+        direction = 3;
+        pauseCounter = 200;
+    }
+    //news puase timeout
+    else if (yPos >= 450) {
+        yPos = 450;
+        direction = -3;
+        pauseCounter = 120;
+    }
+    if (yPos >= 450) {
+        yPos = 450;
+        direction = -3;
+        pauseCounter = 120;
+        loop3();
+    }
+}
+
+
+//end of drawloop
+
+
+
+
+//automation
+function loop4() {
+
+    //rock auto
+    B1 += 0.5;
+    if (B1 >= B1T) {
+        trackRock();
+        rock += 1;
+        B1 = 0;
+    }
+    setTimeout(loop4, worker4);
+}
+
+function loop5() {
+
+    //refine auto   
+    if (rock > 0) {
+        B2 += 0.5;
+        if (B2 >= B2T) {
+            refine += 1;
+            rock -= 1;
+            trackRockDown();
+            trackRefine();
+            B2 = 0;
+        }
+    }
+    setTimeout(loop5, worker5);
+}
+
+function loop6() {
+
+    //sell auto
+    if (refine > 0) {
+        B3 += 0.5;
+        if (B3 >= B3T) {
+            coins += ((1 * rockV * refineV * sellV) + barter);
+            refine -= 1;
+            trackRefineDown();
+            B3 = 0;
+        }
+    }
+    setTimeout(loop6, worker6);
+}
+
+//newspuase & repeat prevention
+var pauseCounter = 0;
+var repeat = 0;
+
+//newslogic
+function loop3() {
+    var random = Math.floor(Math.random() * newsarray.length);
+    if (random == repeat) {
+        var random = Math.floor(Math.random() * newsarray.length);
+    }
+    news = String(newsarray[random]);
+    repeat = random;
+    yPos = 450;
+    direction = -3;
+    pauseCounter = 0;
+}
+loop3();
+
+//Coded by your local trans-girly programer
